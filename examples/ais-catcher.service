@@ -1,0 +1,33 @@
+[Unit]
+Description=AIS-catcher (AIS receiver/decoder + web viewer)
+Documentation=https://github.com/jvde-github/AIS-catcher
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+# Needed to read a USB/serial AIS receiver (e.g. a dAISy)
+SupplementaryGroups=dialout
+StateDirectory=ais-catcher
+#
+# EDIT THIS LINE for your receiver and station.
+#   - Input shown: a dAISy AIS receiver as NMEA over USB serial at 38400 baud.
+#     Find your device path under /dev/serial/by-id/ and set it below.
+#   - For an SDR instead, replace "-e 38400 /dev/..." with e.g. "-d:0".
+#   - -N 8100 starts the web viewer; set station name and lat/lon; prome on
+#     exposes Prometheus /metrics (used by the Cockpit plugin too).
+#
+ExecStart=/usr/bin/AIS-catcher \
+  -e 38400 /dev/serial/by-id/usb-CHANGE_ME-if00 \
+  -N 8100 station "My Station" lat 0.0 lon 0.0 share_loc on prome on \
+  -v 60
+Restart=always
+RestartSec=5
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

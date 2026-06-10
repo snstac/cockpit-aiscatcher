@@ -1,0 +1,17 @@
+{
+    "requires": {
+        "cockpit": "320"
+    },
+
+    "menu": {
+        "index": {
+            "label": "AIS",
+            "order": 101,
+            "keywords": [
+                {
+                    "matches": ["ais", "aiscatcher", "ais-catcher", "vessel", "ship", "marine", "nmea", "daisy", "ais catcher", "ais receiver"]
+                }
+            ]
+        }
+    }
+}

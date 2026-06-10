@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="addon">
+  <id>org.snstac.aiscatcher</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Apache-2.0</project_license>
+  <name>AIS</name>
+  <summary>AIS-catcher status, statistics and vessels in Cockpit</summary>
+  <description>
+    <p>
+      A Cockpit page for a local AIS-catcher instance: start/stop/restart the
+      service, watch live message throughput, tracked vessels, channels and
+      input device, browse a nearby-vessel table, and open the full web map.
+    </p>
+  </description>
+  <extends>org.cockpit_project.cockpit</extends>
+  <launchable type="cockpit-manifest">aiscatcher</launchable>
+  <url type="homepage">https://github.com/snstac/cockpit-aiscatcher</url>
+  <developer id="com.snstac"><name>Sensors &amp; Signals LLC</name></developer>
+</component>

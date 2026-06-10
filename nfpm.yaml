@@ -1,0 +1,36 @@
+# nfpm config — builds both .deb and .rpm from the prebuilt dist/ tree.
+# Usage: VERSION=1.2.3 nfpm package -f nfpm.yaml -p deb -t out/
+#        VERSION=1.2.3 nfpm package -f nfpm.yaml -p rpm -t out/
+name: cockpit-aiscatcher
+arch: all
+platform: linux
+version: ${VERSION}
+release: "1"
+section: utils
+priority: optional
+maintainer: "Sensors & Signals LLC <oss@snstac.com>"
+vendor: "Sensors & Signals LLC"
+homepage: https://github.com/snstac/cockpit-aiscatcher
+license: Apache-2.0
+description: |
+  AIS-catcher status, statistics and vessels for the Cockpit web console.
+  Adds an "AIS" page to Cockpit: start/stop/restart the AIS-catcher service,
+  watch live message and vessel statistics, browse a nearby-vessel table, and
+  open the AIS-catcher web map. Requires a running AIS-catcher instance.
+
+depends:
+  - cockpit-bridge
+
+contents:
+  # Cockpit plugin (prebuilt, gzipped)
+  - src: ./dist/
+    dst: /usr/share/cockpit/aiscatcher
+    type: tree
+
+  # AppStream metainfo
+  - src: ./org.snstac.aiscatcher.metainfo.xml
+    dst: /usr/share/metainfo/org.snstac.aiscatcher.metainfo.xml
+
+  # Example systemd unit for AIS-catcher itself (edit + copy into place)
+  - src: ./examples/ais-catcher.service
+    dst: /usr/share/doc/cockpit-aiscatcher/examples/ais-catcher.service
